@@ -8,7 +8,7 @@ async function call(id, method, params = {}) {
     headers: {
       accept: "application/json, text/event-stream",
       "content-type": "application/json",
-      "user-agent": "Pending Medicare MCP release verifier",
+      "user-agent": "ActableSite release verifier",
     },
     body: JSON.stringify({ jsonrpc: "2.0", id, method, params }),
     signal: AbortSignal.timeout(20_000),
