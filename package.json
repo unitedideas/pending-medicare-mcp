@@ -1,0 +1,14 @@
+{
+  "name": "pending-medicare-mcp-distribution",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "verify:live": "node scripts/verify-live.mjs"
+  },
+  "license": "MIT"
+}
