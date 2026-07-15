@@ -12,6 +12,8 @@ claude mcp add --transport http pending-medicare https://actablesite.com/mcp/pen
 
 For another MCP client, add a Streamable HTTP server using `https://actablesite.com/mcp/pending-medicare`. No API key or authorization header is required.
 
+Or inspect and connect through the automatically indexed [Glama connector](https://glama.ai/mcp/connectors/io.github.unitedideas/pending-medicare-enrollment-data). Glama currently reports the endpoint healthy and exposes its tool schema without requiring a manual submission.
+
 ## Tool
 
 `get_pending_medicare_behavioral_health_preview` returns:
