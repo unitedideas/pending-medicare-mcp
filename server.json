@@ -3,7 +3,7 @@
   "name": "io.github.unitedideas/pending-medicare-behavioral-health-provider-enrollment",
   "title": "Pending Medicare Enrollment Data",
   "description": "Behavioral health NPIs newly pending Medicare provider enrollment; free validated preview.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "websiteUrl": "https://actablesite.com/pending-medicare-behavioral-health-data",
   "repository": {
     "url": "https://github.com/unitedideas/pending-medicare-mcp",
@@ -12,7 +12,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://actablesite.com/mcp/pending-medicare"
+      "url": "https://actablesite.com/mcp/pending-medicare/"
     }
   ]
 }

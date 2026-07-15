@@ -6,8 +6,8 @@ test("registry manifest is a remote-only read-only distribution", async () => {
   const manifest = JSON.parse(await readFile(new URL("../server.json", import.meta.url), "utf8"));
   assert.equal(manifest.$schema, "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json");
   assert.equal(manifest.name, "io.github.unitedideas/pending-medicare-behavioral-health-provider-enrollment");
-  assert.equal(manifest.version, "1.1.0");
-  assert.deepEqual(manifest.remotes, [{ type: "streamable-http", url: "https://actablesite.com/mcp/pending-medicare" }]);
+  assert.equal(manifest.version, "1.1.1");
+  assert.deepEqual(manifest.remotes, [{ type: "streamable-http", url: "https://actablesite.com/mcp/pending-medicare/" }]);
   assert.equal(manifest.repository.url, "https://github.com/unitedideas/pending-medicare-mcp");
   assert.equal(Object.hasOwn(manifest, "packages"), false);
 });

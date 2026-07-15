@@ -18,7 +18,7 @@ async function call(id, method, params = {}) {
 }
 
 const initialized = await call(1, "initialize", { protocolVersion: "2025-06-18", capabilities: {}, clientInfo: { name: "pending-medicare-verifier", version: "1" } });
-assert.equal(initialized.result?.serverInfo?.version, "1.1.0");
+assert.equal(initialized.result?.serverInfo?.version, "1.1.1");
 assert.equal(initialized.result?.capabilities?.tools?.listChanged, false);
 
 const listed = await call(2, "tools/list");
