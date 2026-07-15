@@ -18,7 +18,7 @@ async function call(id, method, params = {}) {
 }
 
 const initialized = await call(1, "initialize", { protocolVersion: "2025-06-18", capabilities: {}, clientInfo: { name: "pending-medicare-verifier", version: "1" } });
-assert.equal(initialized.result?.serverInfo?.version, "1.0.0");
+assert.equal(initialized.result?.serverInfo?.version, "1.0.1");
 assert.equal(initialized.result?.capabilities?.tools?.listChanged, false);
 
 const listed = await call(2, "tools/list");
@@ -27,7 +27,7 @@ assert.equal(listed.result?.tools?.[0]?.annotations?.readOnlyHint, true);
 
 const preview = await call(3, "tools/call", { name: "get_pending_medicare_behavioral_health_preview", arguments: { states: ["CA", "TX"] } });
 const value = preview.result?.structuredContent;
-assert.equal(preview.result?.isError, false);
+assert.equal(preview.result?.isError, false, preview.result?.content?.[0]?.text || "preview tool failed");
 assert.equal(value?.access, "free_public_repository_sample");
 assert.equal(value?.records?.length > 0, true);
 assert.equal(value?.records?.every((record) => ["CA", "TX"].includes(record.state)), true);

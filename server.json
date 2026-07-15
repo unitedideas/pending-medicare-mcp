@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.unitedideas/pending-medicare-enrollment-data",
   "title": "Pending Medicare Enrollment Data",
-  "description": "Behavioral-health NPIs newly present in CMS pending Medicare enrollment; free validated preview.",
-  "version": "1.0.0",
+  "description": "Behavioral health NPIs newly pending Medicare provider enrollment; free validated preview.",
+  "version": "1.0.1",
   "websiteUrl": "https://actablesite.com/pending-medicare-behavioral-health-data",
   "repository": {
     "url": "https://github.com/unitedideas/pending-medicare-mcp",
