@@ -34,3 +34,8 @@ jobs:
         run: ./mcp-publisher login github-oidc
       - name: Publish registry entry
         run: ./mcp-publisher publish server.json
+      - name: Deprecate superseded registry identifier
+        run: >-
+          ./mcp-publisher status --status deprecated --all-versions
+          --message "Renamed for accurate registry discoverability; use io.github.unitedideas/pending-medicare-behavioral-health-provider-enrollment"
+          io.github.unitedideas/pending-medicare-enrollment-data

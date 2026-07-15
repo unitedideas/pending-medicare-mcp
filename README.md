@@ -39,7 +39,7 @@ The live verifier initializes the endpoint, confirms the one-tool read-only inve
 
 ## Registry
 
-The server is published through GitHub OIDC as `io.github.unitedideas/pending-medicare-enrollment-data`. The release workflow needs no publishing secret.
+The server is published through GitHub OIDC as `io.github.unitedideas/pending-medicare-behavioral-health-provider-enrollment`. The release workflow needs no publishing secret.
 
 ## License
 
