@@ -19,4 +19,5 @@ test("documentation preserves the free-to-paid and pending-status boundaries", a
   assert.match(readme, /buyer-paid Apify platform usage is separate/);
   assert.match(readme, /cannot create an Apify token, start a run, open checkout, contact an applicant/);
   assert.match(readme, /does not prove approval, enrollment, billing privileges, credentialing, licensure/);
+  assert.match(readme, /https:\/\/www\.mcpserverspot\.com\/servers\/pending-medicare-enrollment-data/);
 });

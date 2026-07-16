@@ -14,6 +14,8 @@ For another MCP client, add a Streamable HTTP server using `https://actablesite.
 
 Or inspect and connect through the automatically indexed [Glama connector](https://glama.ai/mcp/connectors/io.github.unitedideas/pending-medicare-enrollment-data). Glama currently reports the endpoint healthy and exposes its tool schema without requiring a manual submission.
 
+The [MCP Server Spot listing](https://www.mcpserverspot.com/servers/pending-medicare-enrollment-data) provides a public setup guide, exact tool description, compatibility metadata, and the same source and interpretation boundaries.
+
 ## Tool
 
 `get_pending_medicare_behavioral_health_preview` returns:
