@@ -12,6 +12,23 @@ claude mcp add --transport http pending-medicare https://actablesite.com/mcp/pen
 
 For another MCP client, add a Streamable HTTP server using `https://actablesite.com/mcp/pending-medicare/`. No API key or authorization header is required.
 
+[Open the full client setup guide](https://actablesite.com/medicare-revalidation-mcp-server) for Claude web, desktop, mobile, Cowork, VS Code, Claude Code, and manual Streamable HTTP configuration.
+
+Claude web, desktop, mobile, or Cowork: open **Customize → Connectors → Add custom connector**, name it `Medicare revalidation`, and paste `https://actablesite.com/mcp/pending-medicare/`. No advanced authentication settings are needed.
+
+VS Code user or workspace configuration:
+
+```json
+{
+  "servers": {
+    "medicare-revalidation": {
+      "type": "http",
+      "url": "https://actablesite.com/mcp/pending-medicare/"
+    }
+  }
+}
+```
+
 ### Try it without installing anything
 
 List the live tools:
