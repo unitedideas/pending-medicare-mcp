@@ -18,11 +18,11 @@ async function call(id, method, params = {}) {
 }
 
 const initialized = await call(1, "initialize", { protocolVersion: "2025-06-18", capabilities: {}, clientInfo: { name: "pending-medicare-verifier", version: "1" } });
-assert.equal(initialized.result?.serverInfo?.version, "1.3.1");
+assert.equal(initialized.result?.serverInfo?.version, "1.3.2");
 assert.equal(initialized.result?.capabilities?.tools?.listChanged, false);
 
 const listed = await call(2, "tools/list");
-assert.deepEqual(listed.result?.tools?.map((tool) => tool.name), ["get_pending_medicare_behavioral_health_preview", "check_medicare_revalidation_due_dates", "get_medicare_roster_watch_offer"]);
+assert.deepEqual(listed.result?.tools?.map((tool) => tool.name), ["get_pending_medicare_behavioral_health_preview", "check_medicare_revalidation_due_dates", "get_medicare_revalidation_automation_offer", "get_medicare_roster_watch_offer"]);
 assert.equal(listed.result?.tools?.every((tool) => tool.annotations?.readOnlyHint), true);
 
 const preview = await call(3, "tools/call", { name: "get_pending_medicare_behavioral_health_preview", arguments: { states: ["CA", "TX"] } });
@@ -49,9 +49,28 @@ assert.equal(revalidationValue?.source?.total_rows > 1_000_000, true);
 assert.equal(revalidationValue?.monitoring_handoff?.price?.amount_minor, 900);
 assert.equal(revalidationValue?.monitoring_handoff?.scope?.npis, 20);
 assert.equal(revalidationValue?.monitoring_handoff?.requires_user_confirmation, true);
+assert.equal(revalidationValue?.automation_handoff?.price?.amount_minor, 1);
+assert.equal(revalidationValue?.automation_handoff?.run_limit?.npis, 100);
+assert.equal(revalidationValue?.automation_handoff?.buyer_pays_platform_usage, true);
+assert.equal(revalidationValue?.automation_handoff?.automatic_fulfillment, true);
+assert.equal(revalidationValue?.automation_handoff?.mcp_url, "https://mcp.apify.com?tools=actablesite/medicare-revalidation-lookup-actor");
 assert.match(revalidationValue?.limitations?.join(" ") || "", /not confirmation that a revalidation was submitted/);
 
-const offer = await call(5, "tools/call", { name: "get_medicare_roster_watch_offer", arguments: {} });
+const automationOffer = await call(5, "tools/call", { name: "get_medicare_revalidation_automation_offer", arguments: {} });
+const automationValue = automationOffer.result?.structuredContent;
+assert.equal(automationOffer.result?.isError, false, automationOffer.result?.content?.[0]?.text || "automation offer tool failed");
+assert.equal(automationValue?.kind, "pay_per_result_automation_offer");
+assert.equal(automationValue?.price?.amount_minor, 1);
+assert.equal(automationValue?.price?.unit, "returned_npi_result");
+assert.equal(automationValue?.run_limit?.npis, 100);
+assert.equal(automationValue?.buyer_pays_platform_usage, true);
+assert.equal(automationValue?.automatic_fulfillment, true);
+assert.equal(automationValue?.mcp_url, "https://mcp.apify.com?tools=actablesite/medicare-revalidation-lookup-actor");
+assert.match(automationValue?.mcp_authentication || "", /Apify OAuth is required/);
+assert.equal(automationValue?.ready_tasks?.length, 3);
+assert.equal(automationValue?.requires_user_confirmation, true);
+
+const offer = await call(6, "tools/call", { name: "get_medicare_roster_watch_offer", arguments: {} });
 const offerValue = offer.result?.structuredContent;
 assert.equal(offer.result?.isError, false, offer.result?.content?.[0]?.text || "Roster Watch offer tool failed");
 assert.equal(offerValue?.price?.amount_minor, 900);
@@ -63,4 +82,4 @@ assert.equal(offerValue?.automatic_fulfillment, true);
 assert.equal(offerValue?.requires_user_confirmation, true);
 assert.match(offerValue?.agent_instruction || "", /Do not open checkout/);
 
-process.stdout.write(`${JSON.stringify({ ok: true, endpoint, tools: listed.result.tools.map((tool) => tool.name), current_snapshot: value.current_snapshot, prior_snapshot: value.prior_snapshot, records_returned: value.records_returned, validated_national_count: value.validated_national_count, revalidation_source_sha1: revalidationValue.source.data_file_sha1, revalidation_source_rows: revalidationValue.source.total_rows, roster_watch_offer_ready: true })}\n`);
+process.stdout.write(`${JSON.stringify({ ok: true, endpoint, tools: listed.result.tools.map((tool) => tool.name), current_snapshot: value.current_snapshot, prior_snapshot: value.prior_snapshot, records_returned: value.records_returned, validated_national_count: value.validated_national_count, revalidation_source_sha1: revalidationValue.source.data_file_sha1, revalidation_source_rows: revalidationValue.source.total_rows, automation_offer_ready: true, roster_watch_offer_ready: true })}\n`);
