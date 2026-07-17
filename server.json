@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.unitedideas/pending-medicare-behavioral-health-provider-enrollment",
   "title": "Medicare Enrollment and Revalidation Data",
-  "description": "Free CMS enrollment and revalidation evidence with explicit pay-per-result automation and Roster Watch terms.",
-  "version": "1.3.2",
+  "description": "Free CMS enrollment and revalidation evidence with pay-per-result automation and Roster Watch terms.",
+  "version": "1.3.3",
   "websiteUrl": "https://actablesite.com/medicare-revalidation-mcp-server",
   "repository": {
     "url": "https://github.com/unitedideas/pending-medicare-mcp",
