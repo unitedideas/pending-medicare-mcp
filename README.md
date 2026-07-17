@@ -1,16 +1,16 @@
 # Pending Medicare Enrollment Data MCP server
 
-Read the current validated public preview of behavioral-health NPIs newly present in CMS pending first-time Medicare enrollment files, or check up to 100 NPIs for public Medicare revalidation due dates. The server is remote, read-only, unauthenticated, and dependency-free for clients.
+Read the current validated public preview of behavioral-health NPIs newly present in CMS pending first-time Medicare enrollment files, check up to 100 NPIs for public Medicare revalidation due dates, or retrieve the exact Medicare Roster Watch subscription terms. The server is remote, read-only, unauthenticated, and dependency-free for clients.
 
 ## Connect
 
 Claude Code:
 
 ```bash
-claude mcp add --transport http pending-medicare https://actablesite.com/mcp/pending-medicare
+claude mcp add --transport http pending-medicare https://actablesite.com/mcp/pending-medicare/
 ```
 
-For another MCP client, add a Streamable HTTP server using `https://actablesite.com/mcp/pending-medicare`. No API key or authorization header is required.
+For another MCP client, add a Streamable HTTP server using `https://actablesite.com/mcp/pending-medicare/`. No API key or authorization header is required.
 
 Or inspect and connect through the automatically indexed [Glama connector](https://glama.ai/mcp/connectors/io.github.unitedideas/pending-medicare-enrollment-data). Glama currently reports the endpoint healthy and exposes its tool schema without requiring a manual submission.
 
@@ -38,6 +38,16 @@ The tool cannot create an Apify token, start a run, open checkout, contact an ap
 
 The free lookup remains primary. The monitoring handoff is informational and requires explicit user confirmation before any separate checkout or purchase action. The tool cannot open PECOS, submit a revalidation, upload documents, open checkout, or purchase monitoring.
 
+`get_medicare_roster_watch_offer` returns:
+
+- the exact $9 monthly price and 20-NPI limit;
+- the dated baseline, 120/90/60/30/14/7/1/0-day reminder schedule, and change-only delivery contract;
+- the public CMS signals checked every 15 minutes;
+- the Stripe checkout and cancellation paths, monthly renewal, and automatic-fulfillment expectation; and
+- the boundary separating public list evidence from live PECOS or contractor case status.
+
+This is an informational offer tool. It cannot open checkout, subscribe, or purchase. The client must present the price, renewal, scope, delivery, cancellation, and limitations and obtain explicit user confirmation before any separate checkout or purchase action.
+
 ## Interpretation boundary
 
 Pending means a first-time Medicare enrollment application is still under Medicare Administrative Contractor review. It does not prove approval, enrollment, billing privileges, credentialing, licensure, a new practice, availability, interest, or buying intent. Public NPPES contact fields may be old, shared, or operational. Verify every record before relying on it.
@@ -51,7 +61,7 @@ npm test
 npm run verify:live
 ```
 
-The live verifier initializes the endpoint, confirms the two-tool read-only inventory, retrieves the free preview and revalidation results, and checks their source dates, counts, price boundaries, and limitations. It does not start a paid run, open checkout, or create a purchase.
+The live verifier initializes the endpoint, confirms the three-tool read-only inventory, retrieves the free preview, revalidation results, and Roster Watch offer, and checks their source dates, counts, price boundaries, delivery, cancellation, and limitations. It does not start a paid run, open checkout, or create a purchase.
 
 ## Registry
 
