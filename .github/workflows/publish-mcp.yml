@@ -48,7 +48,15 @@ jobs:
             ./mcp-publisher publish server.json
           fi
       - name: Deprecate superseded registry identifier
-        run: >-
-          printf 'y\n' | ./mcp-publisher status --status deprecated --all-versions
-          --message "Renamed for accurate registry discoverability; use io.github.unitedideas/pending-medicare-behavioral-health-provider-enrollment"
-          io.github.unitedideas/pending-medicare-enrollment-data
+        shell: bash
+        run: |
+          set +e
+          output="$(printf 'y\n' | ./mcp-publisher status --status deprecated --all-versions \
+            --message "Renamed for accurate registry discoverability; use io.github.unitedideas/pending-medicare-behavioral-health-provider-enrollment" \
+            io.github.unitedideas/pending-medicare-enrollment-data 2>&1)"
+          status=$?
+          set -e
+          printf '%s\n' "$output"
+          if [ "$status" -ne 0 ] && ! grep -Fq "No changes to apply" <<<"$output"; then
+            exit "$status"
+          fi
