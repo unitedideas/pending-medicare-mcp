@@ -1,4 +1,4 @@
-# Pending Medicare Enrollment Data MCP server
+# Medicare Enrollment and Revalidation Data MCP server
 
 Read the current validated public preview of behavioral-health NPIs newly present in CMS pending first-time Medicare enrollment files, check up to 100 NPIs for public Medicare revalidation due dates, or retrieve the exact Medicare Roster Watch subscription terms. The server is remote, read-only, unauthenticated, and dependency-free for clients.
 
@@ -12,7 +12,29 @@ claude mcp add --transport http pending-medicare https://actablesite.com/mcp/pen
 
 For another MCP client, add a Streamable HTTP server using `https://actablesite.com/mcp/pending-medicare/`. No API key or authorization header is required.
 
-Or inspect and connect through the automatically indexed [Glama connector](https://glama.ai/mcp/connectors/io.github.unitedideas/pending-medicare-enrollment-data). Glama currently reports the endpoint healthy and exposes its tool schema without requiring a manual submission.
+### Try it without installing anything
+
+List the live tools:
+
+```bash
+curl -sS https://actablesite.com/mcp/pending-medicare/ \
+  -H 'content-type: application/json' \
+  -H 'accept: application/json, text/event-stream' \
+  --data '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'
+```
+
+Check public Medicare revalidation dates for one or more NPIs:
+
+```bash
+curl -sS https://actablesite.com/mcp/pending-medicare/ \
+  -H 'content-type: application/json' \
+  -H 'accept: application/json, text/event-stream' \
+  --data '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"check_medicare_revalidation_due_dates","arguments":{"npis":["1003002296"]}}}'
+```
+
+Both calls are read-only. They require no account, API key, checkout, or purchase.
+
+Or inspect and connect through the automatically indexed [canonical Glama connector](https://glama.ai/mcp/connectors/io.github.unitedideas/pending-medicare-behavioral-health-provider-enrollment). Glama currently reports the endpoint healthy and exposes its tool schema without requiring a manual submission.
 
 The [MCP Server Spot listing](https://www.mcpserverspot.com/servers/pending-medicare-enrollment-data) provides a public setup guide, exact tool description, compatibility metadata, and the same source and interpretation boundaries.
 
