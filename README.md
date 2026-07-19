@@ -79,6 +79,8 @@ The result also includes a bounded pay-per-result automation handoff for teams t
 
 The free lookup remains primary. The monitoring handoff is informational and requires explicit user confirmation before any separate checkout or purchase action. The tool cannot open PECOS, submit a revalidation, upload documents, open checkout, or purchase monitoring.
 
+For software that needs the same source-dated lookup over a quota-managed HTTP API, use the [Medicare Revalidation Due Date API](https://actablesite.com/api/medicare-revalidation-rapidapi-referral?source=mcp_repository_readme). It includes 25 requests per month free; the Pro plan is $19 per month for 1,000 requests. Both plans have hard limits and no soft overages. The API preserves the same CMS source receipt and non-PECOS interpretation boundary.
+
 `get_medicare_revalidation_automation_offer` returns:
 
 - the exact $0.01 USD price per returned NPI result and 100-NPI run limit;

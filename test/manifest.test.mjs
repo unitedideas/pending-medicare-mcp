@@ -30,6 +30,10 @@ test("documentation preserves the free-to-paid, pending-status, and revalidation
   assert.match(readme, /exact \$9 monthly price and 20-NPI limit/);
   assert.match(readme, /cannot open checkout, subscribe, or purchase/);
   assert.match(readme, /requires explicit user confirmation/);
+  assert.match(readme, /\/api\/medicare-revalidation-rapidapi-referral\?source=mcp_repository_readme/);
+  assert.match(readme, /25 requests per month free/);
+  assert.match(readme, /\$19 per month for 1,000 requests/);
+  assert.match(readme, /hard limits and no soft overages/);
   assert.match(readme, /does not prove that a revalidation was submitted, received, accepted, or completed/);
   assert.match(readme, /does not prove approval, enrollment, billing privileges, credentialing, licensure/);
   assert.match(readme, /https:\/\/www\.mcpserverspot\.com\/servers\/pending-medicare-enrollment-data/);
